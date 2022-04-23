@@ -1,28 +1,16 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
-
-
-
-//view imports
-//ts-ignore
-import todoRouter from '../modules/mainPage/router';
-import authRouter from '../modules/authentication/router';
-//
+import authRouter from '../modules/auth/router'
 
 const routes: Array<RouteRecordRaw> = [
-  {
-    path: '',
-    // beforeEnter: [ isAuthenticated ],
-    ...todoRouter
-  },
-  {
-    path: 'auth',
-    ...authRouter
-  }
+	{
+		path: '',
+		...authRouter
+	}
 ]
 
 const router = createRouter({
-  history: createWebHashHistory(),
-  routes
+	history: createWebHashHistory(),
+	routes
 })
 
 export default router
