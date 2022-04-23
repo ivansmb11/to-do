@@ -1,7 +1,8 @@
 <script setup lang="ts">
-
+	import NavbarComponent from '../../../modules/shared/components/NavbarComponent.vue'
 </script>
 
 <template>
-	 <router-view/>
+	<NavbarComponent />
+	<router-view/>
 </template>
