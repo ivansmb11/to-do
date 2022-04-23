@@ -6,7 +6,7 @@
 
 <template>
     <div>
-        <img alt="Vue logo" src="./assets/logo.png" />
+        <img alt="Vue logo" src="./assets/logo.png" /> 
         <p>Vue + Vite</p>
     </div>
 </template>

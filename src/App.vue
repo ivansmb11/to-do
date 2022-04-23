@@ -1,8 +1,10 @@
 <script setup lang="ts">
+import NavbarComponentVue from './modules/shared/components/NavbarComponent.vue';
 
 </script>
 
 <template>
+  <NavbarComponentVue />
   <router-view />
 </template>
 
