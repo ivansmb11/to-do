@@ -1,10 +1,12 @@
 <script setup lang="ts">
 
+import Swal from 'sweetalert2';
+
 </script>
 
 <template>
-	<div class="row d-flex justify-content-center vh-100 p-3">
-		<div class="col-md-7 mt-5">
+	<div class="row d-flex justify-content-center vh-100">
+		<div class="col-md-7">
 			<form>
 				<div>
 					<h2>Inicia Sesión _</h2>
@@ -29,3 +31,9 @@
 		</div>
 	</div>
 </template>
+
+<style lang="scss">
+form {
+	  margin-top: 50%;
+}
+</style>

@@ -7,9 +7,11 @@
 
 <template>
 	<NavbarComponent />
-	<div class="container-fluid row row-cols-2 p-0 m-0">
-		<div class="col-7 auth-bg" :style="bgImg">
-			<p>TO-DO:</p>
+	<div class="container-fluid row row-cols-2 p-0">
+		<div class="col-7 auth-bg">
+			<div class="my-auto">
+				<h1 class="line anim-typewriter">TO-DO: _</h1>
+			</div>
 		</div>
 		<div class="col-5 bg-white text-start">
 			<router-view/>
@@ -17,8 +19,44 @@
 	</div>
 </template>
 
-<style scoped>
+<style lang="scss">
 .auth-bg {
-	background-image: url('../../../assets/img/authBG.png') no-repeat center center fixed;
+	background-image: url('../../../assets/img/authBG.png');
+	background-size: cover;
 }
+
+h1 {
+	color: #fff;
+	font-weight: 900;
+	margin-top: 35%;
+	font-size: 6rem;
+}
+
+.line {
+	position: relative;
+	top: 50%;
+	margin: 0 auto;
+	border-right: 2px solid rgba(255, 255, 255, 0.75);
+	font-size:75px;
+	text-align: center;
+	white-space: nowrap;
+	overflow: hidden;
+	transform: translateY(400%);
+}
+
+.anim-typewriter {
+	animation: typewriter 4s steps(40) 1s 1 normal both,
+	blinkTextCursor 800ms steps(40) infinite normal;
+}
+
+@keyframes typewriter {
+	from { width: 0; }
+	to { width: 4.8em; }
+}
+
+@keyframes blinkTextCursor {
+	from { border-right-color: rgba(255, 255, 255, 0.75);}
+	to { border-right-color: transparent;}
+}
+
 </style>

@@ -10,20 +10,19 @@
 					<h2>Registro _</h2>
 				</div>
 				<div class="form-group py-2">
-					<label class="form-label">Nombre Completo</label>
-					<input type="text" class="form-control" placeholder="Escribe tu nombre completo">
+					<label class="form-label">Nombre</label>
+					<input type="text" class="form-control" placeholder="Escribe tu nombre">
 				</div>
 				<div class="form-group py-2">
 					<label class="form-label">Usuario</label>
 					<input type="text" class="form-control" placeholder="Escribe tu nombre de usuario">
 				</div>
 				<div class="form-group py-2">
-					<label class="form-label">Correo Electrónico</label>
-					<input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-					<small id="emailHelp" class="form-text text-muted">No compartiremos tu correo con nadie. 😉</small>
+					<label class="form-label">Contraseña</label>
+					<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
 				</div>
 				<div class="form-group py-2">
-					<label class="form-label">Contraseña</label>
+					<label class="form-label">Confirma tu contraseña</label>
 					<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
 				</div>
 				<div class="form-group py-2">
@@ -38,3 +37,10 @@
 		</div>
 	</div>
 </template>
+
+
+<style lang="scss">
+form {
+	  margin-top: 30%;
+}
+</style>
