@@ -11,7 +11,7 @@
 				<h1 class="line anim-typewriter">TO-DO: _</h1>
 			</div>
 		</div>
-		<div class="col-5 d-flex justify-content-center bg-white text-start">
+		<div class="col-5 d-flex justify-content-center bg-white text-start border">
 			<router-view />
 		</div>
 	</div>

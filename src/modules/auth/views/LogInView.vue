@@ -4,10 +4,9 @@
 </script>
 
 <template>
-	<form style="width:65%;">
-		<div>
-			<h2>Inicia Sesión _</h2>
-		</div>
+<div class="center">
+	<form style="width:60%;">
+		<h2>Inicia Sesión _</h2>
 		<div class="form-group my-3">
 			<label class="form-label">Usuario</label>
 			<input type="text" class="form-control" placeholder="Escribe tu nombre de usuario">
@@ -25,6 +24,7 @@
 			</router-link>
 		</p>
 	</form>
+</div>
 </template>
 
 <style lang="scss">
