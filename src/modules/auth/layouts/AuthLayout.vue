@@ -1,25 +1,23 @@
 <script setup lang="ts">
 	import NavbarComponent from '../../../modules/shared/components/NavbarComponent.vue';
-	
 	const bgImg = { backgroundImage: '../../../assets/img/authBG.png' };
-
 </script>
 
 <template>
 	<NavbarComponent />
-	<div class="container-fluid row row-cols-2 p-0">
+	<div class="container-fluid row p-0 m-0 vh-100">
 		<div class="col-7 auth-bg">
 			<div class="my-auto">
 				<h1 class="line anim-typewriter">TO-DO: _</h1>
 			</div>
 		</div>
-		<div class="col-5 bg-white text-start">
-			<router-view/>
+		<div class="col-5 d-flex justify-content-center bg-white text-start">
+			<router-view />
 		</div>
 	</div>
 </template>
 
-<style lang="scss">
+<style scoped lang="scss">
 .auth-bg {
 	background-image: url('../../../assets/img/authBG.png');
 	background-size: cover;

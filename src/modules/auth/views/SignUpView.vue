@@ -3,7 +3,7 @@
 </script>
 
 <template>
-	<div class="row d-flex justify-content-center vh-100 p-3">
+	<div class="row vh-100 p-3">
 		<div class="col-md-7 mt-5">
 			<form>
 				<div>
@@ -40,7 +40,5 @@
 
 
 <style lang="scss">
-form {
-	  margin-top: 30%;
-}
+
 </style>
