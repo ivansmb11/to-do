@@ -17,7 +17,7 @@
 	</div>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss">
 .auth-bg {
 	background-image: url('../../../assets/img/authBG.png');
 	background-size: cover;
@@ -55,6 +55,15 @@ h1 {
 @keyframes blinkTextCursor {
 	from { border-right-color: rgba(255, 255, 255, 0.75);}
 	to { border-right-color: transparent;}
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 500px;
+  width: 100%;
+  margin-top: 20%;
 }
 
 </style>
