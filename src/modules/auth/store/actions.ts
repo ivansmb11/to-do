@@ -20,7 +20,8 @@ export const loginUser = async({ commit }: { commit: Commit }, user: UserLogin )
 
   } catch ( error ) {
     if ( axios.isAxiosError( error ) ) {
-      return { ok: false, msg: error.message || 'Ha ocurrido un error' };
+      const { msg } = error.response?.data as any || 'Ha ocurrido un error';
+      return { ok: false, msg};
     } else {
       return { ok: false, msg: 'Ha ocurrido un error' };
     }
