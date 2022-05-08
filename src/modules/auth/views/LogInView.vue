@@ -1,25 +1,26 @@
 <script setup lang="ts">
 
-	import { ref } from 'vue';
-	import Swal from 'sweetalert2';
-	import 'sweetalert2/src/sweetalert2.scss';
-	import { useAuth } from '../hooks/useAuth';
+import { ref } from 'vue';
+import Swal from 'sweetalert2';
+import 'sweetalert2/src/sweetalert2.scss';
+import { useAuth } from '../hooks/useAuth';
 
-	const { loginUser } = useAuth();
+const { loginUser } = useAuth();
 
-	const userForm = ref({
-		username: '',
-		password: ''
-	});
+const userForm = ref({
+	username: '',
+	password: ''
+});
 
-	const onSubmit = () => {
-		if ( userForm.value.password.length < 6 ) {
-			Swal.fire('Error', 'Usuario o contraseña incorrectos', 'error');
-		} else {
-			const user = loginUser( userForm.value );
-			console.log(user);
-		}
+const onSubmit = async() => {
+	if ( userForm.value.password.length < 6 ) {
+		Swal.fire('Error', 'Usuario o contraseña incorrectos', 'error');
+	} else {
+		const { ok, msg } = await loginUser( userForm.value );
+		if ( !ok ) Swal.fire('Error', msg, 'error');
+		else Swal.fire('Bienvenido', 'Has iniciado sesión correctamente', 'success');
 	}
+}
 
 </script>
 
