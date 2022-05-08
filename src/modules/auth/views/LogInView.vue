@@ -1,19 +1,39 @@
 <script setup lang="ts">
 
+	import { ref } from 'vue';
+	import Swal from 'sweetalert2';
+	import 'sweetalert2/src/sweetalert2.scss';
+	import { useAuth } from '../hooks/useAuth';
+
+	const { loginUser } = useAuth();
+
+	const userForm = ref({
+		username: '',
+		password: ''
+	});
+
+	const onSubmit = () => {
+		if ( userForm.value.password.length < 6 ) {
+			Swal.fire('Error', 'Usuario o contraseña incorrectos', 'error');
+		} else {
+			const user = loginUser( userForm.value );
+			console.log(user);
+		}
+	}
 
 </script>
 
 <template>
 <div class="center">
-	<form style="width:60%;">
+	<form @submit.prevent="onSubmit" style="width:60%;">
 		<h2>Inicia Sesión _</h2>
 		<div class="form-group my-3">
 			<label class="form-label">Usuario</label>
-			<input type="text" class="form-control" placeholder="Escribe tu nombre de usuario">
+			<input v-model="userForm.username" type="text" class="form-control" placeholder="Escribe tu nombre de usuario">
 		</div>
 		<div class="form-group my-3">
 			<label class="form-label">Contraseña</label>
-			<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+			<input v-model="userForm.password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
 		</div>
 		<div class="form-group my-3">
 			<button type="submit" class="btn btn-dark btn-large btn-block">Iniciar Sesión</button>
