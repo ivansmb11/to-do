@@ -16,7 +16,7 @@ export const loginUser = async({ commit }: { commit: Commit }, user: UserLogin )
     const user: UserLogged = { ...data };
     
     commit( 'loginUser', { user, token } );
-    return { ok: true };
+    return { ok: true, msg: 'Has iniciado sesión correctamente' };
 
   } catch ( error ) {
     if ( axios.isAxiosError( error ) ) {

@@ -18,7 +18,7 @@ const onSubmit = async() => {
 	} else {
 		const { ok, msg } = await loginUser( userForm.value );
 		if ( !ok ) Swal.fire('Error', msg, 'error');
-		else Swal.fire('Bienvenido', 'Has iniciado sesión correctamente', 'success');
+		else Swal.fire('Bienvenido', msg, 'success');
 	}
 }
 

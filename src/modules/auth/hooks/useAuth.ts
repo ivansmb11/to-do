@@ -1,5 +1,5 @@
 import { useStore } from 'vuex';
-import { UserLogin } from '../../../models/userLogin';
+import { UserLogin } from '../../../models/user';
 
 export const useAuth = () => {
 
