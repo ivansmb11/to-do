@@ -1,19 +1,21 @@
 <script setup lang="ts">
 
+import NavbarComponent from '../../shared/components/NavbarComponent.vue';
 
 
 </script>
 
 <template>
-    <div>
-        <img alt="Vue logo" src="./assets/logo.png" /> 
-        <p>Vue + Vite</p>
+    <NavbarComponent />
+    <div class="container vh-100 w-50">
+        <div class="row my-5">
+            <div class="text-start col-sm-8 mx-auto">
+                <h3 class="text-white fw-bolder py-2">to-do: _</h3>
+            </div>
+        </div>
     </div>
 </template>
 
-<style scoped>
-    p {
-        font-family: Nunito;
-    }
-</style>>
-    
+<style lang="scss" scoped>
+
+</style>
