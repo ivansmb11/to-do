@@ -30,11 +30,22 @@ const onSubmit = async() => {
 		<h2>Inicia Sesión _</h2>
 		<div class="form-group my-3">
 			<label class="form-label">Usuario</label>
-			<input v-model="userForm.username" type="text" class="form-control" placeholder="Escribe tu nombre de usuario">
+			<input
+				v-model="userForm.username"
+				type="text"
+				class="form-control"
+				placeholder="Escribe tu nombre de usuario"
+				required>
 		</div>
 		<div class="form-group my-3">
 			<label class="form-label">Contraseña</label>
-			<input v-model="userForm.password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+			<input
+				v-model="userForm.password"
+				type="password"
+				class="form-control"
+				id="password"
+				placeholder="Escribe tu contraseña"
+				required>
 		</div>
 		<div class="form-group my-3">
 			<button type="submit" class="btn btn-dark btn-large btn-block">Iniciar Sesión</button>

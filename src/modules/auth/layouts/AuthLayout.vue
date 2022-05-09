@@ -1,6 +1,3 @@
-<script setup lang="ts">
-</script>
-
 <template>
 	<div class="container-fluid row p-0 m-0 vh-100">
 		<div class="col-7 auth-bg d-flex align-items-center justify-content-center">
@@ -54,5 +51,4 @@ h1 {
 	from { border-right-color: rgba(255, 255, 255, 0.75);}
 	to { border-right-color: transparent;}
 }
-
 </style>

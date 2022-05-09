@@ -10,3 +10,7 @@ export interface UserLogged {
   lastName: string;
 }
 
+export interface User extends UserLogin {
+  name:     string;
+  lastName: string;  
+}
