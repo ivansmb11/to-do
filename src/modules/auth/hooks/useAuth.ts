@@ -1,5 +1,5 @@
 import { useStore } from 'vuex';
-import { UserLogin } from '../../../models/user';
+import { UserLogin, User } from '../../../models/user';
 
 export const useAuth = () => {
 
@@ -9,8 +9,13 @@ export const useAuth = () => {
     return await store.dispatch('auth/loginUser', user);
   }
 
+  const createUser = async( user: User ) => {
+    return await store.dispatch('auth/createUser', user);
+  }
+
   return {
-    loginUser
+    loginUser,
+    createUser
   }
 
 }

@@ -3,6 +3,9 @@
 import { ref, watch } from 'vue';
 import Swal from 'sweetalert2';
 import 'sweetalert2/src/sweetalert2.scss';
+import { useAuth } from '../hooks/useAuth';
+
+const { createUser } = useAuth();
 
 const userForm = ref({
 	name: 		'',
@@ -29,14 +32,19 @@ watch([password, password2], ([password, password2]) => {
 
 const onSubmit = async() => {
 	if ( successPassword.value ) {
-		
+
 		userForm.value['password'] = password.value;
-		
+
 		if( userForm.value.password.length < 6 ) {
 			Swal.fire( 'Error', 'La contraseña contener 6 caracteres mínimo', 'error' );
 			return;
 		}
-		
+
+		const { ok, msg } = await createUser( userForm.value );
+
+		ok
+			? Swal.fire( 'Registro correcto', msg, 'success' )
+			: Swal.fire( 'Error', msg, 'error' );
 
 	}
 }
