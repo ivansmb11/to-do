@@ -2,6 +2,6 @@ import { UserLogged } from './user';
 
 export interface AuthState {
   status: string;
-  user:   UserLogged;
-  token:  string;
+  user:   UserLogged  | null;
+  token:  string      | null;
 }
