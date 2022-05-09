@@ -41,7 +41,7 @@ const onSubmit = async() => {
 		</div>
 		<p class="small fw-bold mt-4 pt-1 mb-0 my-3">Aún no tienes cuenta?
 			<router-link :to="{ name: 'sign-up' }">
-				<a href="#!" class="link-danger">Registrate</a>
+				<a href="#!" class="link-danger">Regístrate</a>
 			</router-link>
 		</p>
 	</form>
