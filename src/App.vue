@@ -1,6 +1,7 @@
 <script setup lang="ts">
-
-
+import { useAuth } from './modules/auth/hooks/useAuth';
+const { checkAuth } = useAuth();
+checkAuth();
 </script>
 
 <template>
