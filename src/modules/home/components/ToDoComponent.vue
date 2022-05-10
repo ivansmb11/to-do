@@ -1,14 +1,12 @@
 <script setup lang="ts">
 
-import { defineProps } from 'vue'
+import { defineProps } from 'vue';
 
 const props = defineProps({
-    tile: String,
+    title:       String,
     description: String,
-    date: String,
+    date:        String,
 });
-
-
 
 </script>
 
