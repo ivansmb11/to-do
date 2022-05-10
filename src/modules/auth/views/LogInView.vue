@@ -4,6 +4,7 @@ import { ref } from 'vue';
 import Swal from 'sweetalert2';
 import 'sweetalert2/src/sweetalert2.scss';
 import { useAuth } from '../hooks/useAuth';
+import { useRouter } from 'vue-router';
 
 const { loginUser } = useAuth();
 
@@ -12,13 +13,15 @@ const userForm = ref({
 	password: ''
 });
 
+const router = useRouter();
+
 const onSubmit = async() => {
 	if ( userForm.value.password.length < 6 ) {
 		Swal.fire('Error', 'Usuario o contraseña incorrectos', 'error');
 	} else {
 		const { ok, msg } = await loginUser( userForm.value );
 		if ( !ok ) Swal.fire('Error', msg, 'error');
-		else Swal.fire('Bienvenido', msg, 'success');
+		else router.push({ name: 'home' });
 	}
 }
 

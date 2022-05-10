@@ -19,7 +19,25 @@ getToDos();
 </script>
 
 <template>
-<div>
     <NavbarComponent />
-</div>
+    <div class="container bg justify-content-center vh-100">
+        <div class="d-flex text-start">
+            <h1 class="py-5">to-do: _</h1>
+        </div>
+    </div>
 </template>
+
+<style scoped>
+
+.bg {
+    background: #2c2c2c;
+    width: 60%;
+}
+
+h1 {
+    font-size: 30px;
+    font-weight: 900;
+    color: #fff;
+}
+
+</style>

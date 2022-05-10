@@ -4,8 +4,10 @@ import { ref, watch } from 'vue';
 import Swal from 'sweetalert2';
 import 'sweetalert2/src/sweetalert2.scss';
 import { useAuth } from '../hooks/useAuth';
+import { useRouter } from 'vue-router';
 
 const { createUser } = useAuth();
+const router = useRouter();
 
 const userForm = ref({
 	name: 		'',
@@ -43,8 +45,8 @@ const onSubmit = async() => {
 		const { ok, msg } = await createUser( userForm.value );
 
 		ok
-			? Swal.fire( 'Registro correcto', msg, 'success' )
-			: Swal.fire( 'Error', msg, 'error' );
+			? router.push({ name: 'home' })
+			: Swal.fire( 'Error', msg, 'error' )
 
 	}
 }
