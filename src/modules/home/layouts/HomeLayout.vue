@@ -7,10 +7,11 @@ import NavbarComponent from '../../shared/components/NavbarComponent.vue';
 
 const { getPending } = useToDo();
 
-const toDos: Ref<ToDo[]> = ref([]);
+const toDos = ref({});
 
 const getToDos = async () => {
-    toDos.value.push( await getPending() );
+    toDos.value = await getPending();
+    console.log(toDos.value);
 }
 
 getToDos();
