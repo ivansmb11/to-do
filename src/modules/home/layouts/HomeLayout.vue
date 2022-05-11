@@ -1,11 +1,16 @@
 <script setup lang="ts">
 
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 import { useToDo } from '../hooks/useTodo';
 import { ToDo } from '../../../models/toDo';
 import ToDoComponent from '../components/ToDoComponent.vue';
+import { useAuth } from '../../auth/hooks/useAuth';
 
-const { getPending } = useToDo();
+const router = useRouter();
+
+const { getPending } 	= useToDo();
+const { logout } 			= useAuth();
 
 const toDos = ref({
 	total: 0,
@@ -14,6 +19,11 @@ const toDos = ref({
 
 const getToDos = async () => {
 	toDos.value = await getPending();
+}
+
+const onLogout = () => {
+	router.push({ name: 'log-in' });
+	logout();
 }
 
 getToDos();
@@ -39,7 +49,7 @@ getToDos();
 					:date="toDo.date"
 				/>
 			</div>
-			<div v-else>
+			<div v-else class="text-start">
 				<h4 class="text-muted">
 					no entries
 				</h4>
@@ -47,7 +57,7 @@ getToDos();
 		</div>
 		<div class="col-2 position-relative">
 			<div class="position-absolute top-0 end-0 m-5 text-danger" style="font-size: 2rem;">
-				<i class="fas fa-sign-out-alt fa-xl"></i>
+				<i @click="onLogout" class="fas fa-sign-out-alt fa-xl"></i>
 			</div>
 			<div class="position-absolute bottom-0 end-0 m-4">
 				<button class="btn btn-circle btn-primary">

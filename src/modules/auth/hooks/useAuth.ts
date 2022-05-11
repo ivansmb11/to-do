@@ -18,10 +18,15 @@ export const useAuth = () => {
     return resp;
   }
 
+  const logout = () => {
+    store.commit( 'auth/logout' );
+  }
+
   return {
     loginUser,
     createUser,
-    checkAuth
+    checkAuth,
+    logout
   }
 
 }
