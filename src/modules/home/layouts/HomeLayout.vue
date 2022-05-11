@@ -4,14 +4,17 @@ import { Ref, ref } from 'vue';
 import { useToDo } from '../hooks/useTodo';
 import { ToDo } from '../../../models/toDo';
 import NavbarComponent from '../../shared/components/NavbarComponent.vue';
+import ToDoComponent from '../components/ToDoComponent.vue';
 
 const { getPending } = useToDo();
 
-const toDos = ref({});
+const toDos = ref({
+    total: 0,
+    toDos: [] as ToDo[]
+});
 
 const getToDos = async () => {
     toDos.value = await getPending();
-    console.log(toDos.value);
 }
 
 getToDos();
@@ -23,6 +26,9 @@ getToDos();
     <div class="container bg justify-content-center vh-100">
         <div class="d-flex text-start">
             <h1 class="py-5">to-do: _</h1>
+        </div>
+        <div class="py-1" v-for="(toDo, index) in toDos.toDos" :key="index">
+            <ToDoComponent :title="toDo.title" :description="toDo.description" :date="toDo.date"/>
         </div>
     </div>
 </template>
@@ -39,5 +45,6 @@ h1 {
     font-weight: 900;
     color: #fff;
 }
+
 
 </style>
