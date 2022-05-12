@@ -5,11 +5,11 @@ import isAuthGuard from '../modules/auth/router/authGuard';
 
 const routes: Array<RouteRecordRaw> = [
 	{
-		path: '',
+		path: '/auth',
 		...authRouter
 	},
 	{
-		path: '/home',
+		path: '',
 		beforeEnter: [ isAuthGuard ],
 		...homeRouter
 	}
