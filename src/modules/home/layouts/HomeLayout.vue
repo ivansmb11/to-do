@@ -27,7 +27,7 @@ const onLogout = () => {
 	logout();
 }
 
-const helloWorld = ( toDo: ToDo ) => {
+const onNewToDo = ( toDo: ToDo ) => {
 	console.log( toDo );
 }
 
@@ -78,7 +78,7 @@ getToDos();
 			</div>
 		</div>
 	</div>
-	<NewToDoModalComponent @onNewToDo="helloWorld" />
+	<NewToDoModalComponent @onNewToDo="onNewToDo" />
 </div>
 </template>
 

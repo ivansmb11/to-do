@@ -3,12 +3,30 @@
 import { ref } from 'vue';
 import { ToDo } from '../../../models/toDo';
 
-const emit = defineEmits(['onNewToDo']);
+const emit = defineEmits([ 'onNewToDo' ]);
 
-const newToDo = ref({} as ToDo);
+const initialValue: ToDo = {
+  title: '',
+  date: new Date().toISOString().split('T')[0],
+  description: ''
+};
 
-const onSave = () => {
-  emit( 'onNewToDo', newToDo.value );
+const newToDo = ref({
+  ...initialValue
+} as ToDo );
+
+const clearNewToDo = () => {
+  newToDo.value = {
+    ...initialValue
+  } as ToDo;
+}
+
+const onSubmit = () => {
+  if( newToDo.value.title && newToDo.value.date ) {
+    emit( 'onNewToDo', newToDo.value );
+    console.log(new Date().toISOString().split('T')[0]);
+    clearNewToDo();
+  }
 }
 
 </script>
@@ -19,28 +37,61 @@ const onSave = () => {
     <div class="modal-content">
       <div class="modal-header bg-dark text-white border-0">
         <h5 class="modal-title" id="newToDoLabel">new to-do: _</h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button
+          @click="clearNewToDo"
+          type="button"
+          class="btn-close btn-close-white"
+          data-bs-dismiss="modal"
+          aria-label="Close">
+        </button>
       </div>
-      <div class="modal-body bg-dark text-white">
-        <form>
+      <form @submit.prevent="onSubmit">
+        <div class="modal-body bg-dark text-white">
           <div class="mb-3">
             <label for="title" class="col-form-label">title</label>
-            <input v-model="newToDo.title" type="text" class="form-control bg-dark text-white bg-dark text-white" id="title">
+            <input
+              v-model="newToDo.title"
+              type="text"
+              class="form-control bg-dark text-white bg-dark text-white"
+              id="title"
+              required
+            >
           </div>
           <div class="mb-3">
             <label for="date" class="col-form-label">date</label>
-            <input v-model="newToDo.date" type="date" class="form-control bg-dark text-white" id="date">
+            <input
+              v-model="newToDo.date"
+              type="date"
+              class="form-control bg-dark text-white"
+              id="date"
+              required
+            >
           </div>
           <div class="mb-3">
             <label for="description" class="col-form-label">description</label>
-            <textarea v-model="newToDo.description" class="form-control bg-dark text-white" id="description"></textarea>
+            <textarea
+              v-model="newToDo.description"
+              class="form-control bg-dark text-white"
+              id="description">
+            </textarea>
           </div>
-        </form>
-      </div>
-      <div class="modal-footer bg-dark border-0">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">close</button>
-        <button @click="onSave" type="button" class="btn btn-primary" data-bs-dismiss="modal">save</button>
-      </div>
+        </div>
+        <div class="modal-footer bg-dark border-0">
+          <button
+            @click="clearNewToDo"
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal">
+              close
+          </button>
+          <button
+            type="submit"
+            class="btn btn-primary"
+            :data-bs-dismiss="newToDo.title && newToDo.date ? 'modal' : ''">
+            save
+          </button>
+        </div>
+      </form>
     </div>
   </div>
 </div>
