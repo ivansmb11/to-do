@@ -41,8 +41,8 @@ getToDos();
 </script>
 
 <template>
-<div class="container bg vh-100">
-	<div class="row vh-100 ms-5" style="overflow-y: scroll;">
+<div class="scrollable">
+	<div class="row vh-100 ms-5">
 		<div class="col-10">
 			<div class="text-start py-5 bg sticky-top">
 				<h1 class="">to-do: _</h1>
@@ -102,5 +102,8 @@ h1 {
   height: 3.5rem;
   width: 3.5rem;
   border-radius: 50%;
+}
+.scrollable {
+	overflow-y: scroll;
 }
 </style>
