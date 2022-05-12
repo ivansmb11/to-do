@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-const props = defineProps({
+defineProps({
 	title:       String,
 	description: String,
 	date:        String,
