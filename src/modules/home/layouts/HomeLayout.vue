@@ -2,6 +2,8 @@
 
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+import Swal from 'sweetalert2';
+import 'sweetalert2/src/sweetalert2.scss';
 import { useAuth } from '../../auth/hooks/useAuth';
 import { useToDo } from '../hooks/useTodo';
 import { ToDo } from '../../../models/toDo';
@@ -10,25 +12,28 @@ import NewToDoModalComponent from '../components/NewToDoModalComponent.vue';
 
 const router = useRouter();
 
-const { getPending } 	= useToDo();
-const { logout } 			= useAuth();
+const { getPending, createToDo } = useToDo();
+const { logout } = useAuth();
 
 const toDos = ref({
 	total: 0,
 	toDos: [] as ToDo[]
-});
+});``
 
 const getToDos = async () => {
 	toDos.value = await getPending();
 }
 
+const onNewToDo = async( toDo: ToDo ) => {
+	const { ok, msg } = await createToDo( toDo );
+	if ( !ok ) return Swal.fire('Error', msg, 'error');
+	toDos.value.total++;
+	toDos.value.toDos.unshift( toDo );
+}
+
 const onLogout = () => {
 	router.push({ name: 'log-in' });
 	logout();
-}
-
-const onNewToDo = ( toDo: ToDo ) => {
-	console.log( toDo );
 }
 
 getToDos();
@@ -37,9 +42,9 @@ getToDos();
 
 <template>
 <div class="container bg vh-100">
-	<div class="row vh-100 ms-5">
+	<div class="row vh-100 ms-5" style="overflow-y: scroll;">
 		<div class="col-10">
-			<div class="text-start my-5">
+			<div class="text-start py-5 bg sticky-top">
 				<h1 class="">to-do: _</h1>
 			</div>
 			<div
@@ -60,17 +65,17 @@ getToDos();
 				</h4>
 			</div>
 		</div>
-		<div class="col-2 position-relative">
-			<div class="position-absolute top-0 end-0 m-5 text-danger" style="font-size: 2rem;">
+		<div class="col-2 vh-100 position-relative">
+			<div class="position-absolute top-0 end-0 text-danger" style="font-size: 2rem; margin-top: 4rem; margin-right: 6rem;">
 				<i
 					@click="onLogout"
-					class="fas fa-sign-out-alt fa-xl"
+					class="fas fa-sign-out-alt fa-xl position-fixed"
 					style="cursor: pointer;">
 				</i>
 			</div>
-			<div class="position-absolute bottom-0 end-0 m-4">
+			<div class="position-absolute bottom-0 end-0" style="margin: 6rem;">
 				<button
-					class="btn btn-circle btn-primary"
+					class="btn btn-circle btn-primary position-fixed"
 					data-bs-toggle="modal"
 					data-bs-target="#newToDo">
 					<i class="fas fa-plus"></i>
@@ -85,7 +90,6 @@ getToDos();
 <style scoped>
 .bg {
 	background: #2c2c2c;
-	width: 60%;
 }
 
 h1 {

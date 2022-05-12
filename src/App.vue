@@ -15,6 +15,6 @@ checkAuth();
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  background-color: #272727;
+  background-color: #2c2c2c;
 }
 </style>
