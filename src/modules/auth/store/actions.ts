@@ -16,15 +16,15 @@ export const loginUser = async({ commit }: { commit: Commit }, user: UserLogin )
     const user: UserLogged = { ...data };
     
     commit( 'loginUser', { user, token } );
-    return { ok: true, msg: 'Has iniciado sesión correctamente' };
+    return { ok: true, msg: 'login successful' };
     
   } catch ( error ) {
     
     if ( axios.isAxiosError( error ) ) {
-      const { msg } = error.response?.data as any || 'Ha ocurrido un error';
+      const { msg } = error.response?.data as any || 'an error has happened';
       return { ok: false, msg };
     } else {
-      return { ok: false, msg: 'Ha ocurrido un error' };
+      return { ok: false, msg: 'an error has happened' };
     }
   }
 }
@@ -38,15 +38,15 @@ export const createUser = async({ commit }: { commit: Commit }, user: User ) => 
     delete user.password;
     
     commit( 'loginUser', { user, token } );
-    return { ok: true, msg: 'Usuario creado correctamente' };
+    return { ok: true, msg: 'user created successfully' };
     
   } catch ( error ) {
     
     if ( axios.isAxiosError( error ) ) {
-      const { msg } = error.response?.data as any || 'Ha ocurrido un error';
+      const { msg } = error.response?.data as any || 'an error has happened';
       return { ok: false, msg };
     } else {
-      return { ok: false, msg: 'Ha ocurrido un error' };
+      return { ok: false, msg: 'an error has happened' };
     }
     
   }
@@ -59,7 +59,7 @@ export const checkAuth = async ({ commit }: { commit: Commit }) => {
   
   if ( !token ) {
     commit('logout');
-    return { ok: false, msg: 'There is no token' };
+    return { ok: false, msg: 'there is no token' };
   }
   
   try {
@@ -88,10 +88,10 @@ export const checkAuth = async ({ commit }: { commit: Commit }) => {
     commit('logout');
     
     if ( axios.isAxiosError( error ) ) {
-      const { msg } = error.response?.data as any || 'Ha ocurrido un error';
+      const { msg } = error.response?.data as any || 'an error has happened';
       return { ok: false, msg };
     } else {
-      return { ok: false, msg: 'Ha ocurrido un error' };
+      return { ok: false, msg: 'an error has happened' };
     }
     
   }  

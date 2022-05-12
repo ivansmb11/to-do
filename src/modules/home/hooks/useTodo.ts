@@ -20,15 +20,15 @@ export const useToDo = () => {
 		try {
 
 			await toDoApi.post( `/${ userId }`, toDo );
-			return { ok: true, msg: 'To do creado correctamente' };
+			return { ok: true, msg: 'to do created successfully' };
 
 		} catch ( error ) {
 
 			if ( axios.isAxiosError( error ) ) {
-				const { msg } = error.response?.data as any || 'Ha ocurrido un error';
+				const { msg } = error.response?.data as any || 'an error has happened';
 				return { ok: false, msg };
 			} else {
-				return { ok: false, msg: 'Ha ocurrido un error' };
+				return { ok: false, msg: 'an error has happened' };
 			}
 
 		}
