@@ -24,7 +24,6 @@ const clearNewToDo = () => {
 const onSubmit = () => {
   if( newToDo.value.title && newToDo.value.date ) {
     emit( 'onNewToDo', newToDo.value );
-    console.log(new Date().toISOString().split('T')[0]);
     clearNewToDo();
   }
 }

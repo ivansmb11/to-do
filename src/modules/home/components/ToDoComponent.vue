@@ -1,5 +1,7 @@
 <script setup lang="ts">
 
+import { formatDate } from '../../../helpers/formatDate';
+
 defineProps({
 	title:       String,
 	description: String,
@@ -13,8 +15,8 @@ defineProps({
 	<div class="card-body">
 		<div class="row">
 			<div class="col-md-10">
-				<h5 class="card-title text-start text-light">{{ title }}</h5>
-				<h6 class="card-subtitle mb-2 text-muted text-start">{{ date }}</h6>
+				<h5 class="card-title text-start mb-3 text-light">{{ title }}</h5>
+				<h6 class="card-subtitle mb-2 text-muted text-start">{{ formatDate(date || '') }}</h6>
 				<p class="card-text text-muted text-start">{{ description }}</p>
 			</div>
 			<div class="col-md-2 d-flex align-items-center justify-content-center">
