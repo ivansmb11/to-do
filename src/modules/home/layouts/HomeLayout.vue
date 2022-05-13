@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import { ref } from 'vue';
+import { ref, watchEffect } from 'vue';
 import { useRouter } from 'vue-router';
 import Swal from 'sweetalert2';
 import 'sweetalert2/src/sweetalert2.scss';
@@ -21,33 +21,40 @@ const {
 
 const { logout } = useAuth();
 
-const toDos = ref({
+const initialState = {
 	total: 0,
 	toDos: [] as ToDo[]
-});
+}
+
+const toDos = ref( initialState );
+
+const refreshToDos = () => {
+	toDos.value = initialState;
+	getToDos();
+}
 
 const getToDos = async () => {
 	toDos.value = await getPending();
 }
 
-const onNewToDo = async( toDo: ToDo ) => {
-	const { ok, msg } = await createToDo( toDo );
+const onNewToDo = async( toDoToCreate: ToDo ) => {
+	const { ok, msg } = await createToDo( toDoToCreate );
 	if ( !ok ) return Swal.fire('Error', msg, 'error');
-	getToDos();
+	refreshToDos();
 }
 
 const onCheckToDo = ( checkedToDos: string[] ) => {
 	checkedToDos.forEach( async toDo => {
 		const { ok, msg } = await completeToDo( toDo );
 		if ( !ok ) return Swal.fire('Error', msg, 'error');
-		getToDos();
 	});
+	refreshToDos();
 }
 
-const onUpdateToDo = async( toDo: ToDo ) => {
-	const { ok, msg } = await updateToDo( toDo );
+const onUpdateToDo = async( toDoUpdated: ToDo ) => {
+	const { ok, msg } = await updateToDo( toDoUpdated );
 	if ( !ok ) return Swal.fire('Error', msg, 'error');
-	getToDos();
+	refreshToDos();
 }
 
 const onLogout = () => {
