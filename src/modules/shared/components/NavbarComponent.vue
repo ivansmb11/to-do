@@ -1,8 +1,3 @@
-<script setup lang="ts">
-
-</script>
-
-
 <template>
 	<nav class="navbar navbar-light bg-black">
 		<a class="navbar-brand text-white" href="#">

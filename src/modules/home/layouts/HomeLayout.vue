@@ -9,6 +9,7 @@ import { useToDo } from '../hooks/useTodo';
 import { ToDo } from '../../../models/toDo';
 import ToDoComponent from '../components/ToDoComponent.vue';
 import NewToDoModalComponent from '../components/NewToDoModalComponent.vue';
+import LoadingComponent from '../../shared/components/LoadingComponent.vue';
 
 const router = useRouter();
 
@@ -26,6 +27,8 @@ const initialState = {
 	toDos: [] as ToDo[]
 }
 
+const isLoading = ref( false );
+
 const toDos = ref( initialState );
 
 const refreshToDos = () => {
@@ -34,7 +37,9 @@ const refreshToDos = () => {
 }
 
 const getToDos = async () => {
+	isLoading.value = true;
 	toDos.value = await getPending();
+	isLoading.value = false;
 }
 
 const onNewToDo = async( toDoToCreate: ToDo ) => {
@@ -73,6 +78,9 @@ getToDos();
 			<div class="text-start py-5 bg sticky-top">
 				<h1 class="">to-do: _</h1>
 			</div>
+			<div class="d-flex justify-content-center align-items-center">
+				<LoadingComponent v-if="isLoading" />
+			</div>
 			<div
 				class="mb-3 "
 				v-if="toDos.total > 0"
@@ -88,7 +96,7 @@ getToDos();
 					@onUpdateToDo="onUpdateToDo"
 				/>
 			</div>
-			<div v-else class="text-start">
+			<div v-if="!isLoading&&toDos.total === 0" class="text-start">
 				<h4 class="text-muted">
 					no entries
 				</h4>
