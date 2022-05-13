@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import { ref, reactive, onMounted } from 'vue';
+import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import Swal from 'sweetalert2';
 import 'sweetalert2/src/sweetalert2.scss';
@@ -12,7 +12,13 @@ import NewToDoModalComponent from '../components/NewToDoModalComponent.vue';
 
 const router = useRouter();
 
-const { getPending, createToDo, completeToDo } = useToDo();
+const {
+	getPending,
+	createToDo,
+	completeToDo,
+	updateToDo
+} = useToDo();
+
 const { logout } = useAuth();
 
 const toDos = ref({
@@ -39,7 +45,9 @@ const onCheckToDo = ( checkedToDos: string[] ) => {
 }
 
 const onUpdateToDo = async( toDo: ToDo ) => {
-	console.log(toDo);
+	const { ok, msg } = await updateToDo( toDo );
+	if ( !ok ) return Swal.fire('Error', msg, 'error');
+	getToDos();
 }
 
 const onLogout = () => {

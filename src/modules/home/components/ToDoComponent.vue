@@ -16,7 +16,7 @@ const emit = defineEmits([
 ]);
 
 const updatedToDo = ref({
-	id: 					props.id,
+	_id: 					props.id,
 	title: 				props.title,
 	date: 				props.date && props.date.split('T')[0],
 	description: 	props.description
