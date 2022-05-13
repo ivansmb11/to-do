@@ -54,10 +54,34 @@ export const useToDo = () => {
 
 	}
 
+	const updateToDo = async ( toDo: ToDo ) => {
+
+		try {
+			
+			if ( toDo._id ) {
+				await toDoApi.put( `/update/${ toDo._id }`, toDo );
+				return { ok: true, msg: 'to do updated successfully' };
+			} else {
+				return { ok: true, msg: 'id is required' };
+			}
+		} catch (error) {
+		
+			if ( axios.isAxiosError( error ) ) {
+				const { msg } = error.response?.data as any || 'an error has happened';
+				return { ok: false, msg };
+			} else {
+				return { ok: false, msg: 'an error has happened' };
+		
+			}
+		}
+
+	}
+
 	return {
 		getPending,
 		createToDo,
-		completeToDo
+		completeToDo,
+		updateToDo
 	}
 
 }
