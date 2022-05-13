@@ -17,4 +17,10 @@ checkAuth();
   color: #2c3e50;
   background-color: #2c2c2c;
 }
+::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+}
+.bg {
+  background-color: #2c2c2c;
+}
 </style>
