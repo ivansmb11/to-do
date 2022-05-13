@@ -20,10 +20,6 @@ const toDos = ref({
 	toDos: [] as ToDo[]
 });
 
-const fadeOutClass = reactive({
-  animate__fadeOutLeftBig: false
-});
-
 const getToDos = async () => {
 	toDos.value = await getPending();
 }
@@ -40,6 +36,10 @@ const onCheckToDo = ( checkedToDos: string[] ) => {
 		if ( !ok ) return Swal.fire('Error', msg, 'error');
 		getToDos();
 	});
+}
+
+const onUpdateToDo = async( toDo: ToDo ) => {
+	console.log(toDo);
 }
 
 const onLogout = () => {
@@ -70,6 +70,7 @@ getToDos();
 					:description="toDo.description"
 					:date="toDo.date"
 					@onCheckToDo="onCheckToDo"
+					@onUpdateToDo="onUpdateToDo"
 				/>
 			</div>
 			<div v-else class="text-start">
