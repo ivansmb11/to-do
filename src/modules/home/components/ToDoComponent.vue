@@ -1,7 +1,8 @@
 <script setup lang="ts">
 
-import { formatDate } from '../../../helpers/formatDate';
 import { ref } from 'vue';
+import 'animate.css';
+import { formatDate } from '../../../helpers/formatDate';
 
 defineProps({
 	id:					 		String,
@@ -14,14 +15,14 @@ const emit = defineEmits([ 'onCheckToDo' ]);
 
 const checkedToDos = ref([] as string[]);
 
-const onCheckToDo = ( e: Event ) => {
+const onCheckToDo = () => {
 	emit( 'onCheckToDo', checkedToDos.value );
 }
 
 </script>
 
 <template>
-<div class="card bg rounded-3">
+<div class="card bg rounded-3 animate__animated animate__fadeIn">
 	<div class="card-body">
 		<div class="row">
 			<div class="col-md-10">
@@ -36,7 +37,7 @@ const onCheckToDo = ( e: Event ) => {
 					v-model="checkedToDos"
 					:id="id"
 					:value="id"
-					@change="onCheckToDo( $event )"
+					@change="onCheckToDo"
 				>
 			</div>
 		</div>

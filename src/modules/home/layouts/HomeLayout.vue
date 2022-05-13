@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import { ref } from 'vue';
+import { ref, reactive, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import Swal from 'sweetalert2';
 import 'sweetalert2/src/sweetalert2.scss';
@@ -18,7 +18,11 @@ const { logout } = useAuth();
 const toDos = ref({
 	total: 0,
 	toDos: [] as ToDo[]
-});``
+});
+
+const fadeOutClass = reactive({
+  animate__fadeOutLeftBig: false
+});
 
 const getToDos = async () => {
 	toDos.value = await getPending();
