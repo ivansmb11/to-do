@@ -12,7 +12,7 @@ import NewToDoModalComponent from '../components/NewToDoModalComponent.vue';
 
 const router = useRouter();
 
-const { getPending, createToDo } = useToDo();
+const { getPending, createToDo, completeToDo } = useToDo();
 const { logout } = useAuth();
 
 const toDos = ref({
@@ -27,8 +27,15 @@ const getToDos = async () => {
 const onNewToDo = async( toDo: ToDo ) => {
 	const { ok, msg } = await createToDo( toDo );
 	if ( !ok ) return Swal.fire('Error', msg, 'error');
-	toDos.value.total++;
-	toDos.value.toDos.unshift( toDo );
+	getToDos();
+}
+
+const onCheckToDo = ( checkedToDos: string[] ) => {
+	checkedToDos.forEach( async toDo => {
+		const { ok, msg } = await completeToDo( toDo );
+		if ( !ok ) return Swal.fire('Error', msg, 'error');
+		getToDos();
+	});
 }
 
 const onLogout = () => {
@@ -54,9 +61,11 @@ getToDos();
 				:key="index"
 			>
 				<ToDoComponent
+					:id="toDo._id"
 					:title="toDo.title"
 					:description="toDo.description"
 					:date="toDo.date"
+					@onCheckToDo="onCheckToDo"
 				/>
 			</div>
 			<div v-else class="text-start">

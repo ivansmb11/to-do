@@ -1,12 +1,22 @@
 <script setup lang="ts">
 
 import { formatDate } from '../../../helpers/formatDate';
+import { ref } from 'vue';
 
 defineProps({
-	title:       String,
-	description: String,
-	date:        String,
+	id:					 		String,
+	title:       		String,
+	description: 		String,
+	date:        		String
 });
+
+const emit = defineEmits([ 'onCheckToDo' ]);
+
+const checkedToDos = ref([] as string[]);
+
+const onCheckToDo = ( e: Event ) => {
+	emit( 'onCheckToDo', checkedToDos.value );
+}
 
 </script>
 
@@ -20,7 +30,14 @@ defineProps({
 				<p class="card-text text-muted text-start">{{ description }}</p>
 			</div>
 			<div class="col-md-2 d-flex align-items-center justify-content-center">
-				<input class="form-check-input" type="checkbox" value="">
+				<input
+					class="form-check-input"
+					type="checkbox"
+					v-model="checkedToDos"
+					:id="id"
+					:value="id"
+					@change="onCheckToDo( $event )"
+				>
 			</div>
 		</div>
 	</div>
