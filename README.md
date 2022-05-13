@@ -13,3 +13,13 @@ https://stackshare.io/proyecto-desarrolloweb/proyecto-desarrolloweb#stack
 
 # REPO backend (@ososuna)
 https://github.com/ososuna/to-do-rest
+
+## Project setup
+```
+yarn install
+```
+
+### Compiles and hot-reloads for development
+```
+yarn dev
+```
