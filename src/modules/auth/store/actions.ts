@@ -10,46 +10,89 @@ export const loginUser = async({ commit }: { commit: Commit }, user: UserLogin )
   try {
     const { data } = await authApi.post( '', { username, password } );
     const { token } = data;
-
+    
     delete data.token;
-
+    
     const user: UserLogged = { ...data };
-
+    
     commit( 'loginUser', { user, token } );
-    return { ok: true, msg: 'Has iniciado sesión correctamente' };
-
+    return { ok: true, msg: 'login successful' };
+    
   } catch ( error ) {
-
+    
     if ( axios.isAxiosError( error ) ) {
-      const { msg } = error.response?.data as any || 'Ha ocurrido un error';
+      const { msg } = error.response?.data as any || 'an error has happened';
       return { ok: false, msg };
     } else {
-      return { ok: false, msg: 'Ha ocurrido un error' };
+      return { ok: false, msg: 'an error has happened' };
     }
   }
 }
 
 export const createUser = async({ commit }: { commit: Commit }, user: User ) => {
-
+  
   try {
     const { data } = await authApi.post( '/create', user );
     const { token } = data;
-
+    
     delete user.password;
-
+    
     commit( 'loginUser', { user, token } );
-    return { ok: true, msg: 'Usuario creado correctamente' };
-
+    return { ok: true, msg: 'user created successfully' };
+    
   } catch ( error ) {
     
     if ( axios.isAxiosError( error ) ) {
-      const { msg } = error.response?.data as any || 'Ha ocurrido un error';
+      const { msg } = error.response?.data as any || 'an error has happened';
       return { ok: false, msg };
     } else {
-      return { ok: false, msg: 'Ha ocurrido un error' };
+      return { ok: false, msg: 'an error has happened' };
     }
-
+    
   }
+  
+}
 
+export const checkAuth = async ({ commit }: { commit: Commit }) => {
+  
+  const token = localStorage.getItem('token');
+  
+  if ( !token ) {
+    commit('logout');
+    return { ok: false, msg: 'there is no token' };
+  }
+  
+  try {
 
+    const { data } = await authApi.get( 'renew',  {
+      headers: {
+        'x-token': token
+      }
+    });
+
+    const { uid, username, name, lastName } = data;
+
+    const user = {
+      uid,
+      username,
+      name,
+      lastName 
+    }
+    
+    commit( 'loginUser', { user, token } );
+    
+    return { ok: true };
+    
+  } catch ( error ) {
+    
+    commit('logout');
+    
+    if ( axios.isAxiosError( error ) ) {
+      const { msg } = error.response?.data as any || 'an error has happened';
+      return { ok: false, msg };
+    } else {
+      return { ok: false, msg: 'an error has happened' };
+    }
+    
+  }  
 }

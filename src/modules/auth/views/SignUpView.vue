@@ -4,8 +4,10 @@ import { ref, watch } from 'vue';
 import Swal from 'sweetalert2';
 import 'sweetalert2/src/sweetalert2.scss';
 import { useAuth } from '../hooks/useAuth';
+import { useRouter } from 'vue-router';
 
 const { createUser } = useAuth();
+const router = useRouter();
 
 const userForm = ref({
 	name: 		'',
@@ -36,15 +38,15 @@ const onSubmit = async() => {
 		userForm.value['password'] = password.value;
 
 		if( userForm.value.password.length < 6 ) {
-			Swal.fire( 'Error', 'La contraseña contener 6 caracteres mínimo', 'error' );
+			Swal.fire( 'Error', 'password must have 6 characters min', 'error' );
 			return;
 		}
 
 		const { ok, msg } = await createUser( userForm.value );
 
 		ok
-			? Swal.fire( 'Registro correcto', msg, 'success' )
-			: Swal.fire( 'Error', msg, 'error' );
+			? router.push({ name: 'home' })
+			: Swal.fire( 'Error', msg, 'error' )
 
 	}
 }
@@ -54,47 +56,47 @@ const onSubmit = async() => {
 <template>
 <div class="center">
 	<form @submit.prevent="onSubmit" style="width: 60%;">
-		<h2>Registro _</h2>
+		<h2>sign up _</h2>
 		<div class="form-group my-3">
-			<label class="form-label">Nombre</label>
-			<input v-model="userForm.name" type="text" class="form-control" placeholder="Escribe tu nombre" required>
+			<label class="form-label">name</label>
+			<input v-model="userForm.name" type="text" class="form-control" placeholder="type your name" required>
 		</div>
 		<div class="form-group my-3">
-			<label class="form-label">Apellido</label>
-			<input v-model="userForm.lastName" type="text" class="form-control" placeholder="Escribe tu apellido" required>
+			<label class="form-label">last name</label>
+			<input v-model="userForm.lastName" type="text" class="form-control" placeholder="type your last name" required>
 		</div>
 		<div class="form-group my-3">
-			<label class="form-label">Usuario</label>
-			<input v-model="userForm.username" type="text" class="form-control" placeholder="Escribe tu nombre de usuario" required>
+			<label class="form-label">username</label>
+			<input v-model="userForm.username" type="text" class="form-control" placeholder="type your username" required>
 		</div>
 		<div class="form-group my-3">
-			<label class="form-label">Contraseña</label>
+			<label class="form-label">password</label>
 			<input
 				v-model="password"
 				type="password"
 				class="form-control"
 				id="password"
-				placeholder="Escribe una contraseña"
+				placeholder="type your password"
 				:class="{ error: errorPassword, success: successPassword }"
 				required>
 		</div>
 		<div class="form-group my-3">
-			<label class="form-label">Confirmar contraseña</label>
+			<label class="form-label">confirm password</label>
 			<input
 				v-model="password2"
 				type="password"
 				class="form-control"
 				id="password2"
-				placeholder="Confirma tu contraseña"
+				placeholder="confirm your password"
 				:class="{ error: errorPassword, success: successPassword }"
 				required>
 		</div>
 		<div class="form-group mt-4">
-			<button :disabled="errorPassword" type="submit" class="btn btn-dark btn-large btn-block">Registrar</button>
+			<button :disabled="errorPassword" type="submit" class="btn btn-dark btn-large btn-block">sign up</button>
 		</div>
-		<p class="small fw-bold mt-4 pt-1 mb-0 py-2">Ya tienes una cuenta?
+		<p class="small fw-bold mt-4 pt-1 mb-0 py-2">already have an account?
 			<router-link :to="{ name: 'log-in' }">
-				<a href="#!" class="link-danger">Inicia Sesión</a>
+				<a href="#!" class="link-danger">log in</a>
 			</router-link>
 		</p>
 	</form>

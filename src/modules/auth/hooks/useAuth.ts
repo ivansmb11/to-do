@@ -13,9 +13,20 @@ export const useAuth = () => {
     return await store.dispatch('auth/createUser', user);
   }
 
+  const checkAuth = async() => {
+    const resp = await store.dispatch( 'auth/checkAuth' );
+    return resp;
+  }
+
+  const logout = () => {
+    store.commit( 'auth/logout' );
+  }
+
   return {
     loginUser,
-    createUser
+    createUser,
+    checkAuth,
+    logout
   }
 
 }

@@ -12,3 +12,7 @@ export const getUser = ( state: AuthState ) => {
 export const getFullName = ({ user }: { user: UserLogged }) => {
   return `${ user?.name } ${ user?.lastName }` || '';
 }
+
+export const getUserId = ({ user }: { user: UserLogged }) => {
+  return user.uid || '';
+}

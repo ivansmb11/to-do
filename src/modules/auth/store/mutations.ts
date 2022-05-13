@@ -1,4 +1,4 @@
-import { AuthState } from '../../../models/authState';
+import { AuthState }  from '../../../models/authState';
 import { UserLogged } from '../../../models/user';
 
 export const loginUser = ( state: AuthState, { user, token }: { user: UserLogged, token: string } ) => {
@@ -8,4 +8,14 @@ export const loginUser = ( state: AuthState, { user, token }: { user: UserLogged
   }
   state.user    = user;
   state.status  = 'authenticated';
+}
+
+export const logout = ( state: AuthState ) => {
+
+  state.user    = null;
+  state.token   = null;
+  state.status  = 'non-authenticated';
+
+  localStorage.removeItem('token');
+
 }
