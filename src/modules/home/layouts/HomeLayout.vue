@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import { ref, watchEffect } from 'vue';
+import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import Swal from 'sweetalert2';
 import 'sweetalert2/src/sweetalert2.scss';
