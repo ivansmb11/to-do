@@ -34,7 +34,7 @@ const onSubmit = () => {
 <div class="modal fade" id="newToDo" tabindex="-1" aria-labelledby="newToDoLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header bg-dark text-white border-0">
+      <div class="modal-header bg text-white border-0">
         <h5 class="modal-title" id="newToDoLabel">new to-do: _</h5>
         <button
           @click="clearNewToDo"
@@ -45,13 +45,13 @@ const onSubmit = () => {
         </button>
       </div>
       <form @submit.prevent="onSubmit">
-        <div class="modal-body bg-dark text-white">
+        <div class="modal-body bg text-white">
           <div class="mb-3">
             <label for="title" class="col-form-label">title</label>
             <input
               v-model="newToDo.title"
               type="text"
-              class="form-control bg-dark text-white bg-dark text-white"
+              class="form-control bg text-white text-white border-secondary"
               id="title"
               required
             >
@@ -61,7 +61,7 @@ const onSubmit = () => {
             <input
               v-model="newToDo.date"
               type="date"
-              class="form-control bg-dark text-white"
+              class="form-control bg text-white border-secondary"
               id="date"
               required
             >
@@ -70,12 +70,12 @@ const onSubmit = () => {
             <label for="description" class="col-form-label">description</label>
             <textarea
               v-model="newToDo.description"
-              class="form-control bg-dark text-white"
+              class="form-control bg text-white border-secondary"
               id="description">
             </textarea>
           </div>
         </div>
-        <div class="modal-footer bg-dark border-0">
+        <div class="modal-footer bg border-0">
           <button
             @click="clearNewToDo"
             type="button"
@@ -95,3 +95,9 @@ const onSubmit = () => {
   </div>
 </div>
 </template>
+
+<style scoped>
+.bg {
+	background: #2c2c2c;
+}
+</style>

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const toDoApi = axios.create({
-  baseURL: 'http://localhost:3001/api/v1/todo',
+  baseURL:  `${ import.meta.env.VITE_REST_API_URI }/todo`,
   headers: {
     'Access-Control-Allow-Origin': '*'
   }

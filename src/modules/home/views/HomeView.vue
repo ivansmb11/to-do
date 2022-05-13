@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import { ref, reactive, onMounted } from 'vue';
+import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import Swal from 'sweetalert2';
 import 'sweetalert2/src/sweetalert2.scss';
@@ -9,37 +9,59 @@ import { useToDo } from '../hooks/useTodo';
 import { ToDo } from '../../../models/toDo';
 import ToDoComponent from '../components/ToDoComponent.vue';
 import NewToDoModalComponent from '../components/NewToDoModalComponent.vue';
+import LoadingComponent from '../../shared/components/LoadingComponent.vue';
+
+const APP_NAME = import.meta.env.VITE_APP_NAME;
 
 const router = useRouter();
 
-const { getPending, createToDo, completeToDo } = useToDo();
+const {
+	getPending,
+	createToDo,
+	completeToDo,
+	updateToDo
+} = useToDo();
+
 const { logout } = useAuth();
 
-const toDos = ref({
+const initialState = {
 	total: 0,
 	toDos: [] as ToDo[]
-});
-
-const fadeOutClass = reactive({
-  animate__fadeOutLeftBig: false
-});
-
-const getToDos = async () => {
-	toDos.value = await getPending();
 }
 
-const onNewToDo = async( toDo: ToDo ) => {
-	const { ok, msg } = await createToDo( toDo );
-	if ( !ok ) return Swal.fire('Error', msg, 'error');
+const isLoading = ref( false );
+
+const toDos = ref( initialState );
+
+const refreshToDos = () => {
+	toDos.value = initialState;
 	getToDos();
+}
+
+const getToDos = async () => {
+	isLoading.value = true;
+	toDos.value = await getPending();
+	isLoading.value = false;
+}
+
+const onNewToDo = async( toDoToCreate: ToDo ) => {
+	const { ok, msg } = await createToDo( toDoToCreate );
+	if ( !ok ) return Swal.fire('Error', msg, 'error');
+	refreshToDos();
 }
 
 const onCheckToDo = ( checkedToDos: string[] ) => {
 	checkedToDos.forEach( async toDo => {
 		const { ok, msg } = await completeToDo( toDo );
 		if ( !ok ) return Swal.fire('Error', msg, 'error');
-		getToDos();
 	});
+	refreshToDos();
+}
+
+const onUpdateToDo = async( toDoUpdated: ToDo ) => {
+	const { ok, msg } = await updateToDo( toDoUpdated );
+	if ( !ok ) return Swal.fire('Error', msg, 'error');
+	refreshToDos();
 }
 
 const onLogout = () => {
@@ -56,7 +78,10 @@ getToDos();
 	<div class="row vh-100 ms-5">
 		<div class="col-10">
 			<div class="text-start py-5 bg sticky-top">
-				<h1 class="">to-do: _</h1>
+				<h1>{{ APP_NAME }}</h1>
+			</div>
+			<div class="d-flex justify-content-center align-items-center">
+				<LoadingComponent v-if="isLoading" />
 			</div>
 			<div
 				class="mb-3 "
@@ -70,9 +95,10 @@ getToDos();
 					:description="toDo.description"
 					:date="toDo.date"
 					@onCheckToDo="onCheckToDo"
+					@onUpdateToDo="onUpdateToDo"
 				/>
 			</div>
-			<div v-else class="text-start">
+			<div v-if="!isLoading&&toDos.total === 0" class="text-start">
 				<h4 class="text-muted">
 					no entries
 				</h4>

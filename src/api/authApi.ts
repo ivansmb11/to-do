@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const authApi = axios.create({
-  baseURL: 'http://localhost:3001/api/v1/auth',
+  baseURL:  `${ import.meta.env.VITE_REST_API_URI }/auth`,
   headers: {
     'Access-Control-Allow-Origin': '*'
   }
