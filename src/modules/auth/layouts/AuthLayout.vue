@@ -1,7 +1,13 @@
+<script setup lang="ts">
+
+const APP_NAME = import.meta.env.VITE_APP_NAME;
+
+</script>
+
 <template>
 	<div class="container-fluid row p-0 m-0 vh-100">
 		<div class="col-7 auth-bg d-flex align-items-center justify-content-center">
-			<h1 class="line anim-typewriter">to-do: _</h1>
+			<h1 class="line anim-typewriter">{{ APP_NAME }}</h1>
 		</div>
 		<div class="col-5 d-flex align-items-center justify-content-center bg-white text-start border">
 			<router-view />

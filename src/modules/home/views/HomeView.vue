@@ -11,6 +11,8 @@ import ToDoComponent from '../components/ToDoComponent.vue';
 import NewToDoModalComponent from '../components/NewToDoModalComponent.vue';
 import LoadingComponent from '../../shared/components/LoadingComponent.vue';
 
+const APP_NAME = import.meta.env.VITE_APP_NAME;
+
 const router = useRouter();
 
 const {
@@ -76,7 +78,7 @@ getToDos();
 	<div class="row vh-100 ms-5">
 		<div class="col-10">
 			<div class="text-start py-5 bg sticky-top">
-				<h1 class="">to-do: _</h1>
+				<h1>{{ APP_NAME }}</h1>
 			</div>
 			<div class="d-flex justify-content-center align-items-center">
 				<LoadingComponent v-if="isLoading" />
