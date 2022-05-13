@@ -60,7 +60,8 @@ const onUpdateToDo = () => {
 						v-model="updatedToDo.description"
 						type="text"
 						class="text-muted no-border bg"
-						@blur="onUpdateToDo"
+						@blur="onUpdateToDo" 
+						style="width: 100%;"
 					>
 				</p>
 			</div>
