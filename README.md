@@ -1,7 +1,7 @@
 # Vue 3 + TypeScript + Vite
 
-Oswaldo Adrián Osuna Rizo - @ososuna // Full-stack developer / Database manager.
-Iván Sebastián Mendoza Baca - @ivansmb11 // Front-end developer / UI designer.
+Oswaldo Adrián Osuna Rizo - @ososuna // Full-stack developer / Database manager.  
+Iván Sebastián Mendoza Baca - @ivansmb11 // Front-end developer / UI designer.  
 
 
 Este es el proyecto final de la clase de Desarrollo de Aplicaciones Web.
